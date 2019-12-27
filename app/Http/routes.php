@@ -21,15 +21,26 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-
+Route::get('/post/{id}', ['as'=>'home.post','uses'=>'AdminPostsController@post']);
 
 
 Route::group(['middleware'=>'admin'],function (){
-    Route::resource('/admin/users','AdminUsersController');
-    Route::resource('/admin/posts','AdminPostsController');
-    Route::resource('/admin/cat','AdminCategoriesController');
+
+    Route::get('/admin',function (){
+        return view('admin.index');
+    });
+    Route::resource('admin/users','AdminUsersController');
+    Route::resource('admin/posts','AdminPostsController');
+    Route::resource('admin/cat','AdminCategoriesController');
+    Route::resource('admin/media','AdminMediasController');
+    Route::resource('admin/comments','PostCommentController');
+    Route::resource('admin/comment/replies','CommentRepliesController');
+
 });
 
-//Route::get('/admin',function (){
-//   return view('admin.index');
-//});
+//give acces to users tha are logged in using auth
+Route::group(['middleware'=>'auth'],function (){
+
+    Route::post('comment/reply','CommentRepliesController@createReply');
+
+});

@@ -12,9 +12,11 @@
     <title>Admin</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="{{asset('css/app.css')}}" rel="stylesheet">
 
     <link href="{{asset('css/libs.css')}}" rel="stylesheet">
+
+
+    <link href="{{asset('css/app.css')}}" rel="stylesheet">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -25,7 +27,7 @@
     <![endif]-->
 
 
-
+    @yield('styles')
 
 </head>
 
@@ -53,8 +55,12 @@
 
             <!-- /.dropdown -->
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{Auth::user()->name}}
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> {{Auth::user()->name}} <i class="fa fa-caret-down">
+
+
+
+                    </i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -145,6 +151,10 @@
                                 <a href="{{route('admin.posts.create')}}">Create Post</a>
                             </li>
 
+                            <li>
+                                <a href="{{route('admin.comments.index')}}">All Comments</a>
+                            </li>
+
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
@@ -157,9 +167,7 @@
                                 <a href="{{route('admin.cat.index')}}">All Categories</a>
                             </li>
 
-                            <li>
-                                <a href="{{route('admin.cat.create')}}">Create Category</a>
-                            </li>
+
 
                         </ul>
                         <!-- /.nav-second-level -->
@@ -170,21 +178,16 @@
                         <a href="#"><i class="fa fa-wrench fa-fw"></i>Media<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/media">All Media</a>
+                                <a href="{{route('admin.media.index')}}">All Media</a>
                             </li>
 
                             <li>
-                                <a href="">Upload Media</a>
+                                <a href="{{route('admin.media.create')}}">Upload Media</a>
                             </li>
 
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-
-
-
-
-
 
 
                     <li>
@@ -332,6 +335,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header"></h1>
+
                 @yield('content')
             </div>
             <!-- /.col-lg-12 -->
@@ -349,11 +353,12 @@
 <script src="{{asset('js/libs.js')}}"></script>
 
 
-@yield('footer')
+@yield('scripts')
+
+
 
 
 
 </body>
 
 </html>
-
